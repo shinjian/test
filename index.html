@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h2>회원가입</h2>
+    <form id="signupForm">
+        <label for="name">이름:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="email">이메일:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="phone">전화번호:</label><br>
+        <input type="tel" id="phone" name="phone"><br><br>
+
+        <button type="button" onclick="submitForm()">제출</button>
+    </form>
+
+    <script>
+        Telegram.WebApp.ready();
+
+        function submitForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            if (!name || !email || !phone) {
+                alert("모든 정보를 기입해 주세요.");
+                return;
+            }
+
+            // 데이터를 텔레그램 봇으로 전송
+            const data = JSON.stringify({ name, email, phone });
+            Telegram.WebApp.sendData(data);  // 봇에 데이터를 직접 전송
+        }
+    </script>
+</body>
+</html>
